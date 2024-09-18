@@ -1,0 +1,36 @@
+<div class="wrapper">
+  <main class="main-wrapper">
+    <h2>Countries:</h2>
+    <section>
+      <input
+        placeholder="Search"
+        type="search"
+        name="Country"
+        id="country"
+        [(ngModel)]="searchText"
+        (input)="filterByName()"
+      />
+
+      <ul>
+        @for (country of filteredCountries; track country) {
+          <li>{{ country.name }}</li>
+        }
+      </ul>
+    </section>
+  </main>
+
+  <aside>
+   <h2>Holidays Coming</h2>
+    <ul>
+      @for (widget of widgets; track widget) {
+        <li>
+          <p class="widget-text holiday">{{ widget.holidayName | uppercase}}</p>
+          <p>Country: <span class="widget-text country">{{ widget.countryName | uppercase}}</span> </p>
+          <p class="widget-text date">{{ widget.holidayDate | date }}</p>
+        </li>
+      }
+    </ul>
+  </aside>
+
+</div>
+
