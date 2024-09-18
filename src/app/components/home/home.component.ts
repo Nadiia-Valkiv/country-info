@@ -5,6 +5,8 @@ import {FormsModule} from '@angular/forms';
 import {RandomCountriesWidget} from '../../interfaces/randomCountriesWidget';
 import {Holiday} from "../../interfaces/holiday";
 import {DatePipe, UpperCasePipe} from "@angular/common";
+import {IRouter} from "express";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-home',
@@ -20,7 +22,7 @@ export class HomeComponent implements OnInit {
   widgets: RandomCountriesWidget[] = [];
   randomCountries: Country[] = [];
 
-  constructor(private countriesService: CountriesService) {
+  constructor(private countriesService: CountriesService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -60,5 +62,9 @@ export class HomeComponent implements OnInit {
           })
         })
     })
+  }
+
+  goToCountry(code: string, name: string) {
+    this.router.navigate(['country',code, name])
   }
 }

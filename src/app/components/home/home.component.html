@@ -13,7 +13,7 @@
 
       <ul>
         @for (country of filteredCountries; track country) {
-          <li>{{ country.name }}</li>
+          <li (click)="goToCountry(country.countryCode, country.name)">{{ country.name }}</li>
         }
       </ul>
     </section>

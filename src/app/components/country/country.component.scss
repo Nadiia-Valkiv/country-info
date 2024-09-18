@@ -1,0 +1,29 @@
+ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 0;
+  list-style-type: none;}
+
+ul li {
+  background-color: #f0f8ff;
+  border: 1px solid #d1d8e0;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+ul li p {
+  margin: 5px 0;
+}
+
+li {
+  background-color: #e0e7ff;
+  min-width: 200px;
+}
+
+.widget-text {
+  font-weight: bold;
+}

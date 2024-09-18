@@ -1,0 +1,12 @@
+<h1> Holidays in {{countryName}}</h1>
+<ul>
+  @for (holiday of listOfHolidays; track holiday) {
+    <li>
+      <p class="widget-text holiday">{{ holiday.name | uppercase}}</p>
+      <p>types: <span class="widget-text country">{{ holiday.types[0] | uppercase}}</span> </p>
+      <p class="widget-text date">{{ holiday.date| date }}</p>
+    </li>
+  }
+</ul>
+
+<button (click)="backToHomePage()">Back to Home Page</button>
