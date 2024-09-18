@@ -5,7 +5,6 @@ import {FormsModule} from '@angular/forms';
 import {RandomCountriesWidget} from '../../interfaces/randomCountriesWidget';
 import {Holiday} from "../../interfaces/holiday";
 import {DatePipe, UpperCasePipe} from "@angular/common";
-import {IRouter} from "express";
 import {Router} from "@angular/router";
 
 @Component({

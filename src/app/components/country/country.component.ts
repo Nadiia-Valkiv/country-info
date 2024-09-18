@@ -41,5 +41,4 @@ export class CountryComponent implements OnInit {
   backToHomePage() {
     this.router.navigate(['']);
   }
-
 }

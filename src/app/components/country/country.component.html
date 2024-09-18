@@ -2,9 +2,9 @@
 <ul>
   @for (holiday of listOfHolidays; track holiday) {
     <li>
-      <p class="widget-text holiday">{{ holiday.name | uppercase}}</p>
-      <p>types: <span class="widget-text country">{{ holiday.types[0] | uppercase}}</span> </p>
-      <p class="widget-text date">{{ holiday.date| date }}</p>
+      <p class="holiday">{{ holiday.name | uppercase}}</p>
+      <p>type: <span class="country">{{ holiday.types[0] | uppercase}}</span> </p>
+      <p class="date">{{ holiday.date| date }}</p>
     </li>
   }
 </ul>
