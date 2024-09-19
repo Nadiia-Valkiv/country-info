@@ -1,27 +1,43 @@
-# CountryInfo
+# Holiday and Country Information Application
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.4.
+This Angular application allows users to search for countries, view details about their holidays. It fetches holiday data from an external API and provides users with an intuitive interface to explore country-specific holiday information.
 
-## Development server
+## Features
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- **Search for Countries**: Users can search for a specific country by name.
+- **View Holiday Details**: The application retrieves and displays public holidays for a selected country.
 
-## Code scaffolding
+## Technologies Used
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- **Angular**: Version 18.2.0
+- **TypeScript**: 
+- **RxJS**: For handling asynchronous data streams.
+- **HTTP Client Module**: Used for making API calls to retrieve data about countries and their holidays.
 
-## Build
+## Setup and Installation
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Prerequisites
 
-## Running unit tests
+- **Node.js**: You will need Node.js installed to run the Angular development server and manage dependencies. Download and install it from [Node.js official website](https://nodejs.org/).
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Installation
 
-## Running end-to-end tests
+1. **Clone the repository:**
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+   ```bash
+   git clone git@github.com:Nadiia-Valkiv/country-info.git
+   
+2. **Install the dependencies::**
 
-## Further help
+   ```bash
+   npm install
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+3. **Run the application in development mode:**
+
+   ```bash
+   ng serve
+
+4. **Run the application in production mode:**
+
+   ```bash
+   ng build --prod
