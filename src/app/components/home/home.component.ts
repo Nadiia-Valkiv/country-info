@@ -1,11 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {CountriesService} from '../../services/countries.service';
-import {Country} from '../../interfaces/country';
-import {FormsModule} from '@angular/forms';
-import {RandomCountriesWidget} from '../../interfaces/randomCountriesWidget';
-import {Holiday} from "../../interfaces/holiday";
-import {DatePipe, UpperCasePipe} from "@angular/common";
-import {Router} from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { CountriesService } from '../../services/countries.service';
+import { Country } from '../../interfaces/country';
+import { FormsModule } from '@angular/forms';
+import { RandomCountriesWidget } from '../../interfaces/randomCountriesWidget';
+import { Holiday } from '../../interfaces/holiday';
+import { DatePipe, UpperCasePipe } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -21,8 +21,10 @@ export class HomeComponent implements OnInit {
   widgets: RandomCountriesWidget[] = [];
   randomCountries: Country[] = [];
 
-  constructor(private countriesService: CountriesService, private router: Router) {
-  }
+  constructor(
+    private countriesService: CountriesService,
+    private router: Router,
+  ) {}
 
   ngOnInit(): void {
     this.getCountries();
@@ -32,7 +34,9 @@ export class HomeComponent implements OnInit {
     this.countriesService
       .getAllAvailableCountries()
       .subscribe((listOfCountries: Country[]) => {
-        this.listOfCountries = listOfCountries.sort((a, b) => a.name.localeCompare(b.name));
+        this.listOfCountries = listOfCountries.sort((a, b) =>
+          a.name.localeCompare(b.name),
+        );
         this.filteredCountries = listOfCountries;
 
         this.showRandomCountriesHolidayWidget();
@@ -41,29 +45,30 @@ export class HomeComponent implements OnInit {
 
   filterByName(): void {
     this.filteredCountries = this.listOfCountries.filter((country) =>
-      country.name.toLowerCase().includes(this.searchText.toLowerCase())
+      country.name.toLowerCase().includes(this.searchText.toLowerCase()),
     );
   }
 
   showRandomCountriesHolidayWidget(): void {
-    const allCountries = [...this.listOfCountries]
+    const allCountries = [...this.listOfCountries];
     this.randomCountries = allCountries
       .sort(() => 0.5 - Math.random())
       .slice(0, 3);
 
-    this.randomCountries.forEach(country => {
-      this.countriesService.getCountryHoliday(country.countryCode)
+    this.randomCountries.forEach((country) => {
+      this.countriesService
+        .getCountryHoliday(country.countryCode)
         .subscribe((holidays: Holiday[]) => {
           this.widgets.push({
             countryName: country.name,
             holidayName: holidays[0].name,
             holidayDate: holidays[0].date,
-          })
-        })
-    })
+          });
+        });
+    });
   }
 
   goToCountry(code: string, name: string) {
-    this.router.navigate(['country',code, name])
+    this.router.navigate(['country', code, name]);
   }
 }

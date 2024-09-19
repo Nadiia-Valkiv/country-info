@@ -1,18 +1,15 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
-import {CountriesService} from "../../services/countries.service";
-import {Holiday} from "../../interfaces/holiday";
-import {DatePipe, UpperCasePipe} from "@angular/common";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CountriesService } from '../../services/countries.service';
+import { Holiday } from '../../interfaces/holiday';
+import { DatePipe, UpperCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-country',
   standalone: true,
-  imports: [
-    DatePipe,
-    UpperCasePipe
-  ],
+  imports: [DatePipe, UpperCasePipe],
   templateUrl: './country.component.html',
-  styleUrl: './country.component.scss'
+  styleUrl: './country.component.scss',
 })
 export class CountryComponent implements OnInit {
   countryCode!: string;
@@ -21,17 +18,20 @@ export class CountryComponent implements OnInit {
   years: number[] = [];
   selectedYear!: number;
 
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private countriesService: CountriesService,
+  ) {}
 
-  constructor(private route:ActivatedRoute, private router:Router, private countriesService: CountriesService) {
-  }
-
-  ngOnInit() {this.route.params.subscribe(params => {
-    this.countryCode= params['code'];
-    this.countryName= params['name'];
-    this.initializeYears();
-    this.selectedYear = new Date().getFullYear();
-    this.getHolidays(this.selectedYear)
-  })
+  ngOnInit() {
+    this.route.params.subscribe((params: { [key: string]: string }) => {
+      this.countryCode = params['code'];
+      this.countryName = params['name'];
+      this.initializeYears();
+      this.selectedYear = new Date().getFullYear();
+      this.getHolidays(this.selectedYear);
+    });
   }
   initializeYears() {
     const startYear = 2020;
@@ -41,12 +41,17 @@ export class CountryComponent implements OnInit {
     }
   }
 
-  getHolidays(year: number){
+  getHolidays(year: number): void {
     this.countriesService
       .getCountryHolidayByYear(this.countryCode, year)
-      .subscribe((listOfHoliday: Holiday[]) => {
-        this.listOfHolidays = listOfHoliday;
-      });
+      .subscribe(
+        (listOfHoliday: Holiday[]) => {
+          this.listOfHolidays = listOfHoliday;
+        },
+        (error) => {
+          console.error('Error fetching holidays:', error);
+        },
+      );
   }
 
   selectYear(year: number) {
