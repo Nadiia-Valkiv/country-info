@@ -3,13 +3,13 @@ import {Country} from '../interfaces/country';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Holiday} from "../interfaces/holiday";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root',
 })
 export class CountriesService {
-  private readonly url: string =
-    'https://date.nager.at/api/v3';
+  private url = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
 
@@ -23,9 +23,10 @@ export class CountriesService {
     );
   }
 
-  getCountryHolidayByYear(countryCode: string, year: string): Observable<Country> {
+  getCountryHolidayByYear(countryCode: string, year: number): Observable<Holiday[]> {
+    const yearString = year.toString();
     return this.http.get<any>(
-      this.url + `/PublicHolidays/${year}/${countryCode}`
+      this.url + `/PublicHolidays/${yearString}/${countryCode}`
     );
   }
 }

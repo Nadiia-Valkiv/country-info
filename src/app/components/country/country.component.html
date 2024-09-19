@@ -1,6 +1,16 @@
+
 <h1> Holidays in {{countryName}}</h1>
+<div class="year-switcher">
+  @for (year of years; track year) {
+    <button
+      (click)="selectYear(year)"
+      [class.active]="year === selectedYear">
+      {{ year }}
+    </button>
+  }
+</div>
 <ul>
-  @for (holiday of listOfHolidays; track holiday) {
+  @for (holiday of listOfHolidays; track holiday.name) {
     <li>
       <p class="holiday">{{ holiday.name | uppercase}}</p>
       <p>type: <span class="country">{{ holiday.types[0] | uppercase}}</span> </p>

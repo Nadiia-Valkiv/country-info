@@ -18,6 +18,8 @@ export class CountryComponent implements OnInit {
   countryCode!: string;
   countryName!: string;
   listOfHolidays!: Holiday[];
+  years: number[] = [];
+  selectedYear!: number;
 
 
   constructor(private route:ActivatedRoute, private router:Router, private countriesService: CountriesService) {
@@ -26,16 +28,30 @@ export class CountryComponent implements OnInit {
   ngOnInit() {this.route.params.subscribe(params => {
     this.countryCode= params['code'];
     this.countryName= params['name'];
-    this.getHolidays()
+    this.initializeYears();
+    this.selectedYear = new Date().getFullYear();
+    this.getHolidays(this.selectedYear)
   })
   }
+  initializeYears() {
+    const startYear = 2020;
+    const endYear = 2030;
+    for (let year = startYear; year <= endYear; year++) {
+      this.years.push(year);
+    }
+  }
 
-  getHolidays(){
+  getHolidays(year: number){
     this.countriesService
-      .getCountryHoliday(this.countryCode)
+      .getCountryHolidayByYear(this.countryCode, year)
       .subscribe((listOfHoliday: Holiday[]) => {
         this.listOfHolidays = listOfHoliday;
       });
+  }
+
+  selectYear(year: number) {
+    this.selectedYear = year;
+    this.getHolidays(year);
   }
 
   backToHomePage() {
